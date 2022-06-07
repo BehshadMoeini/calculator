@@ -1,0 +1,22 @@
+enum tokenType { INT, COM, ID, SEMI, IF, WHILE, OPAR, CPAR, EOF, ASSIGN, INTEGER, DOB /* NUM */, EOL, OCB, CCB, OB, CB, EQ,
+LT, GT, LTE, GTE, PLUS, MINUS, MUL};
+
+
+int a, b, count;
+-----convert-----
+{INT} {ID,"a"} {COM} {ID,"b"} {COM} {ID,"count"} {SEMI}
+
+
+a = 2 + 3;
+-----convert-----
+{ID,"a"} {ASSIGN} {INTEGER, 2} {PLUS} {INTEGER, 3} {SEMI}
+
+
+b = a + 1
+-----convert-----
+{ID, "b"} {ASSIGN} {ID, "a"} {PLUS} {INTEGER, 1}
+
+
+a = (b + 1) * 3
+-----convert-----
+{ID,"a"} {ASSIGN} {OPAR} {ID, "b"} {PLUS} {INTEGER, 1} {CPAR} {MUL} {INTEGER, 3}
